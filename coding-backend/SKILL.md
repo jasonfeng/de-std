@@ -1,9 +1,18 @@
 ---
 name: coding-backend
-description: 后端 Java/Spring Boot/MyBatis Plus 编码规范。写后端代码前必须调用。
+description: 后端 Java/Spring Boot/MyBatis Plus 编码规范。写 Java 代码前必须调用。
 ---
 
 # 后端编码规范
+
+## 触发时机
+
+用户说以下内容时**必须**先调用此 Skill：
+
+- "写一个 Service/Mapper/Controller"
+- "添加后端 API"
+- "创建 Entity/DTO/VO"
+- "实现业务逻辑"
 
 ## 调用时机
 

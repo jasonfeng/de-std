@@ -1,9 +1,18 @@
 ---
 name: coding-frontend
-description: 前端 Vue 3/TypeScript/Element Plus 编码规范。写前端代码前必须调用。
+description: 前端 Vue 3/TypeScript/Element Plus 编码规范。写 Vue/TS 代码前必须调用。
 ---
 
 # 前端编码规范
+
+## 触发时机
+
+用户说以下内容时**必须**先调用此 Skill：
+
+- "写一个 Vue 组件/页面"
+- "添加前端功能"
+- "创建表单/表格/列表"
+- "实现 UI 交互"
 
 ## 调用时机
 

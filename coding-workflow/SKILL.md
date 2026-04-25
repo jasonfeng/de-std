@@ -1,9 +1,19 @@
 ---
 name: coding-workflow
-description: 开发工作流 Story/PR/Code Review 规范。提交代码前必须调用。
+description: 开发工作流 Story/PR/Code Review 规范。提交代码或进入 review 状态前必须调用。
 ---
 
 # 开发工作流规范
+
+## 触发时机
+
+用户说以下内容时**必须**先调用此 Skill：
+
+- "提交代码/push"
+- "准备 review"
+- "完成 Story"
+- "创建 Pull Request"
+- "进行代码审查"
 
 ## 调用时机
 
