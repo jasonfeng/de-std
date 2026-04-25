@@ -7,20 +7,11 @@ description: 开发工作流 Story/PR/Code Review 规范。提交代码或进入
 
 ## 触发时机
 
-用户说以下内容时**必须**先调用此 Skill：
-
 - "提交代码/push"
 - "准备 review"
 - "完成 Story"
 - "创建 Pull Request"
 - "进行代码审查"
-
-## 调用时机
-
-- 开始 Story 开发之前
-- 提交 Pull Request 之前
-- 进行代码审查之前
-- 标记 Story 为 done 之前
 
 ---
 
@@ -33,8 +24,6 @@ description: 开发工作流 Story/PR/Code Review 规范。提交代码或进入
 - 以设计文档为实现的唯一标准
 - Task 简述与设计文档冲突时以设计文档为准
 
----
-
 ### Step 2: TDD 开发（Red → Green → Refactor）
 
 ```
@@ -46,12 +35,6 @@ RED → GREEN → REFACTOR
 ```
 
 **判定标准**：测试文件最后修改时间不得晚于实现文件。
-
-**适用范围**：DomainService、AppService、Controller、前端组件
-
-**不适用**：纯配置文件（pom.xml）、SQL 迁移脚本、无逻辑的 DTO/VO/Param
-
----
 
 ### Step 3: 运行测试
 
@@ -180,13 +163,55 @@ chore: 更新依赖版本
 
 ---
 
-## Agent 使用指南
+## Epic 完成检查清单
 
-| Workflow Step | Agent | 作用 |
-|--------------|-------|------|
-| Step 5 RED | `tdd-guide` | 指导测试用例设计 |
-| Step 5 GREEN | `build-error-resolver` | 修复编译错误 |
-| Step 6 | `e2e-runner` | 编写和运行 E2E 测试 |
-| Step 8 | `java-reviewer` / `typescript-reviewer` | 批量代码审查 |
-| Step 9 | `superpowers:code-reviewer` | Story 最终审查 |
-| 安全敏感代码 | `security-reviewer` | 检查安全漏洞 |
+- 所有 Story 状态为 done
+- 所有测试通过
+- 所有模块覆盖率达标
+- E2E 测试通过
+- 文档更新完成
+- 发布说明准备就绪
+
+---
+
+## 前后端集成规范
+
+### 集成前检查
+
+- API 接口定义一致
+- 字段命名约定一致
+- 错误码定义一致
+- 分页参数一致
+
+### 集成测试
+
+- 前端调用后端真实 API
+- 验证数据格式
+- 验证错误处理
+- 验证边界情况
+
+---
+
+## 禁止行为汇总
+
+| 行为 | 原因 |
+|------|------|
+| 无测试进入 review | 违反 TDD 原则 |
+| 跳过测试运行 | 可能隐藏 bug |
+| 遗留 TODO 注释 | 所有问题必须解决 |
+| 半成品提交 | 影响团队协作 |
+| 手动修改数据库 | Flyway 版本失控 |
+
+---
+
+## 详细规范
+
+- **[story-completion.md](references/story-completion.md)** — Story 完成标准、Done 定义、验收条件
+- **[story-completion-checklist.md](references/story-completion-checklist.md)** — Story 完成检查清单、状态流转
+- **[epic-completion-checklist.md](references/epic-completion-checklist.md)** — Epic 完成检查清单、发布准备
+- **[code-review.md](references/code-review.md)** — 代码审查规范、Checklist、审查流程
+- **[git-workflow.md](references/git-workflow.md)** — Git 分支策略、提交规范、PR 流程
+- **[deployment.md](references/deployment.md)** — 部署流程、环境配置、发布检查
+- **[frontend-backend-integration.md](references/frontend-backend-integration.md)** — 前后端集成规范、接口契约、集成测试
+- **[governance.md](references/governance.md)** — 项目治理、决策流程、变更管理
+- **[todo-tracking.md](references/todo-tracking.md)** — TODO 追踪、问题管理、优先级排序
