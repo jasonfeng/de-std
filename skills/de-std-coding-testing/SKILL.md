@@ -54,6 +54,41 @@ RED → GREEN → REFACTOR
 
 ## 单元测试规范（Java）
 
+### 测试数据构造（Instancio）
+
+使用 Instancio 自动生成测试数据，减少 70-90% 样板代码：
+
+```java
+import static org.instancio.Instancio.*;
+import static org.instancio.Select.field;
+
+// 一行生成完整对象
+UserEntity user = create(UserEntity.class);
+
+// 只覆盖测试相关字段
+UserEntity user = of(UserEntity.class)
+    .set(field(UserEntity::getUsername), "admin")
+    .create();
+
+// 批量生成
+List<UserEntity> users = ofList(UserEntity.class).size(10).create();
+
+// JUnit 5 参数注入
+@ExtendWith(InstancioExtension.class)
+class MyTest {
+    @Test
+    void test(@Given UserEntity user) { /* user 已自动填充 */ }
+}
+```
+
+| 场景 | 推荐方式 |
+|------|---------|
+| 3+ 字段的对象 | `Instancio.create()` 或 `@Given` |
+| 只关心部分字段 | `of().set().create()` |
+| 1-2 字段简单对象 | 手动构造即可 |
+
+详细规范：[test-data.md](references/test-data.md)
+
 ### 测试命名
 
 ```java

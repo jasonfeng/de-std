@@ -308,7 +308,97 @@ class UserDomainServiceTest {
 
 ## 测试数据工厂
 
-### 基本工厂
+### Instancio 自动生成（推荐）
+
+使用 [Instancio](https://www.instancio.org/) 自动填充测试对象，减少 70-90% 样板代码。
+
+#### 一行生成完整对象
+
+```java
+import static org.instancio.Instancio.create;
+import static org.instancio.Instancio.of;
+import static org.instancio.Select.field;
+
+// 自动填充所有字段（包括嵌套对象、集合）
+UserEntity user = create(UserEntity.class);
+
+// 批量生成
+List<UserEntity> users = Instancio.ofList(UserEntity.class).size(10).create();
+```
+
+#### 只覆盖测试相关字段
+
+```java
+// 只设置测试需要的字段，其余自动生成
+UserEntity user = of(UserEntity.class)
+    .set(field(UserEntity::getUsername), "admin")
+    .set(field(UserEntity::getStatus), UserStatus.ACTIVE)
+    .create();
+// email、age、createdAt 等字段自动填充，无需手动设置
+```
+
+#### JUnit 5 集成（@Given 注解）
+
+```java
+@ExtendWith(InstancioExtension.class)
+class UserDomainServiceTest {
+
+    @Test
+    void shouldMapToDto(@Given UserEntity user) {
+        // user 已自动填充所有字段，无需手动构造
+        UserDTO dto = UserAssembly.toDTO(user);
+        assertThat(dto.getName()).isEqualTo(user.getName());
+    }
+}
+```
+
+#### 忽略无关字段
+
+```java
+UserEntity user = of(UserEntity.class)
+    .ignore(field(UserEntity::getId))          // 忽略自动生成的ID
+    .ignore(field(UserEntity::getCreatedAt))   // 忽略时间戳
+    .set(field(UserEntity::getUsername), "admin")
+    .create();
+```
+
+#### 生成特定范围的值
+
+```java
+UserEntity user = of(UserEntity.class)
+    .generate(field(UserEntity::getAge), gen -> gen.ints().range(18, 65))
+    .generate(field(UserEntity::getEmail), gen -> gen.text().pattern("#a#a#a#a@example.com"))
+    .create();
+```
+
+#### 失败可复现
+
+测试失败时 Instancio 会打印 seed 值，可精确复现：
+
+```java
+@ExtendWith(InstancioExtension.class)
+class MyTest {
+    @Test
+    void myTest() {
+        // 如果失败，控制台会打印 seed，用 withSeed() 复现
+        UserEntity user = of(UserEntity.class)
+            .withSeed(12345L)  // 复现特定失败场景
+            .create();
+    }
+}
+```
+
+### 使用原则
+
+| 场景 | 推荐方式 |
+|------|---------|
+| 3 个以上字段的对象 | `Instancio.create()` 或 `@Given` |
+| 只关心部分字段 | `of().set().create()` |
+| 需要特定范围的值 | `of().generate().create()` |
+| 集合/批量数据 | `Instancio.ofList().size(n).create()` |
+| 1-2 个字段的简单对象 | 手动构造即可 |
+
+### 基本工厂（Instancio 不适用时）
 
 ```java
 public class TestDataFactory {
