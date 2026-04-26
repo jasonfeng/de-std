@@ -1,0 +1,19 @@
+{
+  "name": "de-std",
+  "version": "2.0.0",
+  "description": "数擎(DataEngine)编码规范 Skill 包。写代码前必须调用的强制规范集合。",
+  "author": {
+    "name": "Fengzhongtian"
+  },
+  "repository": "https://github.com/jasonfeng/de-std.git",
+  "license": "MIT",
+  "keywords": [
+    "coding-standards",
+    "ddd",
+    "tdd",
+    "spring-boot",
+    "vue3",
+    "postgresql"
+  ],
+  "skills": ["./skills/"]
+}
