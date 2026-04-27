@@ -9,7 +9,7 @@
 ### Mapper接口位置
 
 ```
-backend/dataengine-backend/src/main/java/com/dp/dataengine/domain/repository/{module}/
+backend/dataengine-api/src/main/java/com/dp/dataengine/domain/repository/{module}/
 ├── UserMapper.java
 ├── RoleMapper.java
 └── DepartmentMapper.java
@@ -18,7 +18,7 @@ backend/dataengine-backend/src/main/java/com/dp/dataengine/domain/repository/{mo
 ### XML映射文件位置
 
 ```
-backend/dataengine-backend/src/main/resources/mapper/{module}/
+backend/dataengine-api/src/main/resources/mapper/{module}/
 ├── UserMapper.xml
 ├── RoleMapper.xml
 └── DepartmentMapper.xml

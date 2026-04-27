@@ -150,7 +150,7 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /app
 
 # 复制JAR文件
-COPY target/dataengine-backend-1.0.0.jar app.jar
+COPY target/dataengine-api-1.0.0.jar app.jar
 
 # 暴露端口
 EXPOSE 8080

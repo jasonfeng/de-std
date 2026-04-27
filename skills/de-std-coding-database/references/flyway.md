@@ -22,7 +22,7 @@
 ## 📁 迁移脚本位置
 
 ```
-backend/dataengine-backend/src/main/resources/db/migration/
+backend/dataengine-api/src/main/resources/db/migration/
 ├── V1__create_user_tables.sql
 ├── V2__create_dict_tables.sql
 ├── V3__create_form_example_tables.sql
@@ -120,7 +120,7 @@ CREATE TRIGGER trg_t_example_updated
 
 ```bash
 # 进入项目目录
-cd backend/dataengine-backend
+cd backend/dataengine-api
 
 # 启动PostgreSQL环境（如果未启动）
 docker-compose up -d dataengine-postgres

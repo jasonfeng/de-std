@@ -507,7 +507,7 @@ services:
     restart: unless-stopped
 
   backend:
-    image: dataengine-backend:latest
+    image: dataengine-api:latest
     ports:
       - "8080:8080"
     environment:

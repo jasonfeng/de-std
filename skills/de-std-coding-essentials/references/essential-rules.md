@@ -217,7 +217,7 @@ open target/site/jacoco/index.html
 **✅ 正确流程**：
 ```bash
 # 1. 创建迁移脚本
-backend/dataengine-backend/src/main/resources/db/migration/V24__create_table.sql
+backend/dataengine-api/src/main/resources/db/migration/V24__create_table.sql
 
 # 2. 语法验证
 docker exec -i dataengine-postgres psql -U postgres -d dataengine_dev < V24__create_table.sql
